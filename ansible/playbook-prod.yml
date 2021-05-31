@@ -1,0 +1,11 @@
+---
+- name: Play die volledige routerconfig naar production lab importeert
+  hosts: 
+  gather_facts: no
+  
+  tasks:
+    - name: config importeren in de router
+
+
+  
+
