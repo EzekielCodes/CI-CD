@@ -118,7 +118,7 @@ image:./images/aanpassing3.jpg[] +
 *&* +
 image:./images/aanpassing4.jpg[] +
  +
-Als ip-adres gebruik je #het tweede# uit de toegewezen range in de *kolom P* van de link:https://tinyurl.com/yh8ez83o[tabel].
+Als ip-adres gebruik je #het tweede# uit de toegewezen range in de *kolom E* van de link:https://tinyurl.com/yh8ez83o[tabel].
 ====
 ==== Deploy een gitlab runner
 
