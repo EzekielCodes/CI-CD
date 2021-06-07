@@ -277,7 +277,7 @@ Dit kan je oplossen door *"Environment variables"* mee te geven aan Gitlab. Bij 
 * Telkens lokaal aanpassingen aan je repo doorvoeren en pushen om te zien of je pipeline werkt zorgt voor veel vertraging en zorgt vooral voor een lange waslijst van gefaalde pipelines in gitlab. Dit kan je vermijden door je pipeline lokaal uit te voeren (vb rechtstreeks op je runner). +
 Dit kan je doen op je build-vm met het commando `"sudo gitlab-runner exec docker [naam van de job]"`.
 
-==== Optimalisatie (optioneel)
+==== Optimalisatie (Uitbreiding)
 
 Bij Git is het makkelijk als er kan gewerkt worden met merge-requests (mergen) van branches naar de master.
 In dat opzicht kan je je repository aanpassen zodat de development branch steeds kan gemerged worden naar de master.
