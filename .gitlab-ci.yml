@@ -34,6 +34,7 @@ config-cml:
   stage: config
   script:
     - echo $Vars > /root/.virlrc
+    - cat /toot/.virlrc
     - cml ls
     - cml up -f cml/development/dev.yaml --provision
     - cml ls
