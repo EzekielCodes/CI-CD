@@ -24,7 +24,10 @@
 
     - name: Output selected info
       debug:
-        msg: "{{ info.commands }}"
+        msg: 
+          - "Het command {{ info.commands }} was succesvol"
+          - "Packet loss: {{info.packet_loss}}"
+          - "Round Trip Time: {{info.rtt}}"
 
 
   
