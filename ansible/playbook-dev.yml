@@ -24,7 +24,7 @@
 
     - name: Output selected info
       debug:
-        msg: "{{ info.stdout_lines }}"
+        msg: "{{ info.commands }}"
 
 
   
