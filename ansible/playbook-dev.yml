@@ -20,11 +20,7 @@
     - name: Test reachability tussen routers
       cisco.ios.ios_ping:
         dest: 192.168.1.2
-        register: info
-
-    - name: Output selected info
-      debug:
-        msg: "{{ info.stdout_lines }}"
+ 
 
 
   
