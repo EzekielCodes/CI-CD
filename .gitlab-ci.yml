@@ -44,6 +44,7 @@ config-cml:
     #- export ANSIBLE_CONFIG=ansible.cfg
     - ansible-playbook playbook-dev.yml
     - cml rm -f --no-confirm
+    - "[ -s anisble/backup/running-config.cfg] || exit 1"
   artifacts:
     paths:
       - ansible/backup/running-config.cfg
