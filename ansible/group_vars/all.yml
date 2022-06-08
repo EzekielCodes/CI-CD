@@ -5,3 +5,5 @@ ansible_password: cisco
 ansible_become: yes
 ansible_become_method: enable
 ansible_become_password: cisco
+ip_loopback0: {nr: 0, ip: "172.16.29.1"}
+ip_loopback1: {nr: 0, ip: "172.17.29.1"}

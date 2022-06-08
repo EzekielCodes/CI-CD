@@ -33,10 +33,13 @@ prepare-ansible:
 config-cml:
   stage: config
   script:
+    - cml ls
     - cml up -f cml/development/dev.yaml --provision
     - cml ls
+    - cml clear
+    - chmod 700 ansible
     - cd ansible
-    - export ANSIBLE_CONFIG=ansible.cfg
+    #- export ANSIBLE_CONFIG=ansible.cfg
     - ansible-playbook playbook-dev.yml
     - cml rm -f --no-confirm
   artifacts:
