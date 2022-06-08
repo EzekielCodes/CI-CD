@@ -29,6 +29,12 @@
           - "Packet loss: {{info.packet_loss}}"
           - "Round Trip Time: {{info.rtt}}"
 
+    - name: Backup running_config
+      cisco.ios.ios_config:
+        backup: yes
+        backup_options:
+          dir_path: /backup/running-config.cfg
+
 
   
 
