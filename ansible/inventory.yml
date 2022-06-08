@@ -2,15 +2,13 @@
 all:
     hosts:
         controller:
-            ansible_host:10.129.23.222
-        
+            ansible_host: 10.129.23.222       
     children:
         development:
             hosts:
                 devnode:
-                    ansible_host:10.129.41.196
-
+                    ansible_host: 10.129.41.196
         production:
             hosts:
                 prodnode:
-                    ansible_host:10.129.41.197
+                    ansible_host: 10.129.41.197
