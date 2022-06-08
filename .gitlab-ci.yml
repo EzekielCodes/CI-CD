@@ -1,0 +1,46 @@
+image: centos:8
+
+stages:
+  - prepare
+  - config
+  - deploy
+
+before_script:
+  - yum install -y python3
+  - yum install python3-pip
+  - python3 -m pip install --upgrade pip
+  - pip3 install virtualenv
+  - python3 -m venv container
+  - source container/bin/activate
+  - pip3 install --upgrade pip
+  - pip3 install -r requirements.txt
+  - ansible-galaxy collection install cisco.ios
+
+
+prepare-ansible:
+  stage: prepare
+  script:
+    - pip3 install ansible-lint
+    - cd ansible
+    - ansible-lint playbook-dev.yml -v
+    - ansible-lint playbook-prod.yml -v
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_COMMIT_BRANCH == "develop"
+
+
+config-cml:
+  stage: config
+  script:
+    - cml up -f cml/development/dev.yaml --provision
+    - cml ls
+    - cd ansible
+    - export ANSIBLE_CONFIG=ansible.cfg
+    - ansible-playbook playbook-dev.yml
+    - cml rm -f --no-confirm
+  artifacts:
+    paths:
+      - ansible/backup/running-config.cfg
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "push"
+    - if: $CI_COMMIT_BRANCH == "develop"
