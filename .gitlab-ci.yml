@@ -1,4 +1,4 @@
-image: centos:8
+image: rockylinux:8.5
 
 stages:
   - prepare
@@ -24,7 +24,7 @@ prepare-ansible:
     - pip3 install ansible-lint
     - cd ansible
     - ansible-lint playbook-dev.yml -v
-    - ansible-lint playbook-prod.yml -v
+    
   rules:
     - if: $CI_PIPELINE_SOURCE == "push"
     - if: $CI_COMMIT_BRANCH == "develop"
