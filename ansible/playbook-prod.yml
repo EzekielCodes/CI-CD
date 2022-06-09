@@ -6,7 +6,7 @@
   tasks:
     - name: config importeren in de router
       cisco.ios.ios_config:
-        src: ansible/backup/running-config.cfg      
+        src: backup/running-config.cfg      
 
     - name: save running to startup when modified
       cisco.ios.ios_config:
