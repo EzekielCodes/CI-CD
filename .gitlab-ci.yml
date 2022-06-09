@@ -70,6 +70,10 @@ config-cml:
       - ansible/backup/running-config.cfg
     when: on_success
 
+  #rules:
+   # - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+    #- if: '$CI_COMMIT_REF_NAME == "development"'
+
   
 
     #https://example.com/<namespace>/<project>/-/jobs/artifacts/<ref>/download?job=<job_name>
@@ -106,4 +110,4 @@ deploy-prod:
    # variables:
     #  - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
   #rules:
-   # - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
+   # - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
