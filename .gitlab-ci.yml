@@ -25,9 +25,12 @@ prepare-ansible:
     - cd ansible
     - ansible-lint playbook-dev.yml -v
     
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "push"
-    - if: $CI_COMMIT_BRANCH == "develop"
+  #rules:
+   # - if: $CI_PIPELINE_SOURCE == "push"
+    #- if: $CI_COMMIT_BRANCH == "develop"
+  
+  only:
+    - development
 
 
 config-cml:
@@ -44,14 +47,19 @@ config-cml:
     - export ANSIBLE_CONFIG=ansible.cfg
     - ansible-playbook playbook-dev.yml
     - cml ls
-    #- cml rm -f --no-confirm
+    - cml rm -f --no-confirm
+
+  only:
+    - development
     
   artifacts:
     paths:
       - ansible/backup/running-config.cfg
-  rules:
-    - if: $CI_PIPELINE_SOURCE == "push"
-    - if: $CI_COMMIT_BRANCH == "develop"
+
+    
+  #rules:
+   # - if: $CI_PIPELINE_SOURCE == "push"
+    #- if: $CI_COMMIT_BRANCH == "develop"
 
 #deploy-prod:
  # stage: deploy
