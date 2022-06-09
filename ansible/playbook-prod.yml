@@ -5,6 +5,17 @@
   
   tasks:
     - name: config importeren in de router
+      cisco.ios.ios_config:
+        src: backup/running-config.cfg
+
+    - name: check the startup-config against the running-config
+      cisco.ios.ios_config:
+      diff_against: startup
+      
+
+    - name: save running to startup when modified
+      cisco.ios.ios_config:
+      save_when: modified
 
 
   
