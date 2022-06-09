@@ -2,7 +2,7 @@ lab:
   description: ''
   notes: ''
   timestamp: 1619699117.7692037
-  title: voornaam.familienaam-PROD   ############ Aanpassen !!! ###########
+  title: Ezekiel.Akindele-PROD   ############ Aanpassen !!! ###########
   version: 0.0.4
 nodes:
   - id: n0
@@ -105,7 +105,7 @@ nodes:
       interface GigabitEthernet0/0
           description to port1.unmanaged-switch-0
       ! #################################### ip adres hieronder aanpassen ##################################
-          ip address y.y.y.y 255.255.255.0
+          ip address 10.129.41.197 255.255.255.0
           no shutdown
       interface GigabitEthernet0/1
           description to GigabitEthernet0/0.internal-router

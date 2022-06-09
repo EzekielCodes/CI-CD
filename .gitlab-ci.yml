@@ -1,0 +1,98 @@
+
+
+stages:
+  - prepare
+  - config
+  - deploy
+
+default:
+  image: rockylinux:8.5
+  tags: 
+  - "tag_Ezekiel"
+  before_script:
+    #- yum update -y
+    - yum install python3 -y
+    - yum install python3-pip
+    - python3 -m pip install --upgrade pip
+    - pip3 install virtualenv
+    #- python3 -m venv container
+    - python3 -m venv venv
+    - source venv/bin/activate
+    - python3 -m pip install --upgrade pip
+  
+    #- source container/bin/activate
+    #- pip3 install --upgrade pip
+    - pip3 install -r requirements.txt
+    - ansible-galaxy collection install cisco.ios
+
+
+prepare-ansible:
+  stage: prepare
+  script:
+    - pip3 install ansible-lint
+    - cd ansible
+    - ansible-lint playbook-dev.yml -v
+    
+  #rules:
+   # - if: $CI_PIPELINE_SOURCE == "push"
+    #- if: $CI_COMMIT_BRANCH == "develop"
+  
+  only:
+    - development
+
+
+config-cml:
+  stage: config
+  script:
+    - echo "$Vars" > /root/.virlrc
+    #- echo $'VIRL_HOST=10.129.28.227\nCML_VERIFY_CERT=False\nVIRL_USERNAME=admin\nVIRL_PASSWORD=Azerty123@' > /root/.virlrc
+    - cat /root/.virlrc
+    #- cml --debug ls
+    - cml ls
+    - cml up -f cml/development/dev.yaml --provision
+    - cml ls
+    - cml clear
+    - chmod 700 ansible
+   # - cd ansible
+   # - export ANSIBLE_CONFIG=ansible.cfg
+   # - ansible-playbook playbook-dev.yml
+    - cml ls
+    
+    - ANSIBLE_CONFIG=$PWD/ansible/ansible.cfg ansible-playbook ansible/playbook-dev.yml
+    #- "[ --s ansible/backup/running-config.cfg ] || exit 1" 
+    - "[ -s ansible/backup/running-config.cfg ] || exit 1"
+    - cml ls
+    #- cml rm -f --no-confirm
+    #- curl -O -L https://gitlab.com/ikdoeict/toluwani.akindele/2122-ia-c-cicd-project-akindele-ezekiel/-/jobs/artifacts/development/download?job=config-cml
+    
+  artifacts:
+    paths:
+      - ansible/backup/running-config.cfg
+    when: on_success
+
+  
+
+    #https://example.com/<namespace>/<project>/-/jobs/artifacts/<ref>/download?job=<job_name>
+    #https://gitlab.com/ikdoeict/toluwani.akindele/2122-ia-c-cicd-project-akindele-ezekiel/-/jobs/artifacts/development/download?job=config-cml
+  #rules:
+   # - if: $CI_PIPELINE_SOURCE == "push"
+    #- if: $CI_COMMIT_BRANCH == "development"
+
+deploy-prod:
+  stage: deploy
+  script: 
+    - cml clear
+    - cml ls
+    - cml up -f cml/production/prod.yaml --provision
+    - sed -i 's/10.129.41.196/10.129.41.197/g' ansible/backup/running-config.cfg
+    - ansible-playbook playbook-dev.yml
+    - cml save --extract -f ../lab-topology-production.yml
+    #- cml rm -f --no-confirm
+
+  artifacts:
+    paths:
+      - ansible/backup/lab-topology-production.yml
+    when: on_success
+
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
