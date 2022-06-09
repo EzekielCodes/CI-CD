@@ -89,9 +89,10 @@ deploy-prod:
     - cml save --extract -f ../lab-topology-production.yml
     #- cml rm -f --no-confirm
 
-   artifacts:
+  artifacts:
     paths:
       - ansible/backup/lab-topology-production.yml
+    when: on_success
 
   rules:
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
