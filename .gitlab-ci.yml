@@ -57,7 +57,7 @@ config-cml:
    # - export ANSIBLE_CONFIG=ansible.cfg
    # - ansible-playbook playbook-dev.yml
     - cml ls
-    #- cml rm -f --no-confirm
+    - cml rm -f --no-confirm
     - ANSIBLE_CONFIG=$PWD/ansible/ansible.cfg ansible-playbook ansible/playbook-dev.yml
     #- "[ --s ansible/backup/running-config.cfg ] || exit 1" 
     - "[ -s ansible/backup/running-config.cfg ] || exit 1"
