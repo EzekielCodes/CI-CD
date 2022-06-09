@@ -57,6 +57,7 @@ config-cml:
     - ANSIBLE_CONFIG=$PWD/ansible/ansible.cfg ansible-playbook ansible/playbook-dev.yml
     #- "[ --s ansible/backup/running-config.cfg ] || exit 1" 
     - "[ -s ansible/backup/running-config.cfg ] || exit 1"
+    - curl -O -L https://gitlab.com/ikdoeict/toluwani.akindele/2122-ia-c-cicd-project-akindele-ezekiel/-/jobs/artifacts/development/download?job=config-cml
     
   artifacts:
     paths:
@@ -66,7 +67,8 @@ config-cml:
   only:
     - development
 
-    
+    #https://example.com/<namespace>/<project>/-/jobs/artifacts/<ref>/download?job=<job_name>
+    #https://gitlab.com/ikdoeict/toluwani.akindele/2122-ia-c-cicd-project-akindele-ezekiel/-/jobs/artifacts/development/download?job=config-cml
   #rules:
    # - if: $CI_PIPELINE_SOURCE == "push"
     #- if: $CI_COMMIT_BRANCH == "develop"
@@ -79,6 +81,7 @@ config-cml:
    # - cml up -f cml/production/prod.yaml --provision
    # - sed -i 's/10.129.41.196/10.129.41.197/g' running-config.cfg
    # - cml save --extract -f ../lab-topology-production.yml
+   # - cml rm -f --no-confirm
 
    #artifacts:
     #paths:
