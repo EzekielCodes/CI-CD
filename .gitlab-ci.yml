@@ -40,8 +40,8 @@ prepare-ansible:
 config-cml:
   stage: config
   script:
-    - echo "$Vars" > /root/.virlrc
-    #- echo $'VIRL_HOST=10.129.28.227\nCML_VERIFY_CERT=False\nVIRL_USERNAME=admin\nVIRL_PASSWORD=Azerty123@' > /root/.virlrc
+    #- echo "$Vars" > /root/.virlrc
+    - echo $'VIRL_HOST=10.129.28.227\nCML_VERIFY_CERT=False\nVIRL_USERNAME=admin\nVIRL_PASSWORD=Azerty123@' > /root/.virlrc
     - cat /root/.virlrc
     #- cml --debug ls
     - cml ls
