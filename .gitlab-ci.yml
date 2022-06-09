@@ -87,14 +87,14 @@ deploy-prod:
     - cml clear
     - cml up -f cml/production/prod.yaml --provision
     - sed -i 's/10.129.41.196/10.129.41.197/g' ansible/backup/running-config.cfg
-    - ANSIBLE_CONFIG=$PWD/ansible/ansible.cfg ansible-playbook ansible/playbook-prod.yml
+    - ANSIBLE_CONFIG=ansible/ansible.cfg ansible-playbook ansible/playbook-prod.yml
     - cml ls
     - cml save --extract -f ../lab-topology-production.yml
     #- cml rm -f --no-confirm
 
   artifacts:
     paths:
-      - ../lab-topology-production.yml
+      - lab-topology-production.yml
     when: on_success
   
   only:
