@@ -6,23 +6,27 @@ stages:
   - deploy
 
 before_script:
-  - yum update -y
-  - yum install -y python3
+  #- yum update -y
+  - yum install python3 -y
   - yum install python3-pip
-  - python3 -m pip install --upgrade pip
+  #- python3 -m pip install --upgrade pip
   - pip3 install virtualenv
-  - python3 -m venv container
-  - source container/bin/activate
-  - pip3 install --upgrade pip
+  #- python3 -m venv container
+  - python3 -m venv venv
+  - source venv/bin/activate
+  - python3 -m pip install --upgrade pip
+  
+  #- source container/bin/activate
+  #- pip3 install --upgrade pip
   - pip3 install -r requirements.txt
-  - ansible-galaxy collection install cisco.ios
+  #- ansible-galaxy collection install cisco.ios
 
 
 prepare-ansible:
   stage: prepare
   script:
-    - pip3 install ansible-lint
-    - cd ansible
+    - pip3 install ansible-lint==5.4.0
+#    - cd ansible
     - ansible-lint playbook-dev.yml -v
     
   #rules:
