@@ -94,7 +94,7 @@ deploy-prod:
 
   artifacts:
     paths:
-      - ../lab-topology-production.yml
+      - lab-topology-production.yml
     when: on_success
   
   only:
