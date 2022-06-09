@@ -70,9 +70,8 @@ config-cml:
       - ansible/backup/running-config.cfg
     when: on_success
 
-  only:
-    - development
-    - main
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "main" || $CI_COMMIT_REF_NAME == "development"'
 
   
 
