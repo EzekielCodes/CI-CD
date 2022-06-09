@@ -43,7 +43,7 @@ config-cml:
     - echo "$Vars" > /root/.virlrc
     - cat /root/.virlrc
     #- cml --debug
-    #- cml ls
+    - cml ls
     - cml up -f cml/development/dev.yaml --provision
     - cml ls
     - cml clear
