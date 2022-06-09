@@ -81,17 +81,20 @@ config-cml:
 deploy-prod:
   stage: deploy
   script: 
-    - cml clear
+    - echo "$Vars" > /root/.virlrc
+    - cat /root/.virlrc
     - cml ls
+    - cml clear
     - cml up -f cml/production/prod.yaml --provision
     - sed -i 's/10.129.41.196/10.129.41.197/g' ansible/backup/running-config.cfg
-    - ansible-playbook playbook-dev.yml
+    - ANSIBLE_CONFIG=$PWD/ansible/ansible.cfg ansible-playbook ansible/playbook-prod.yml
+    - cml ls
     - cml save --extract -f ../lab-topology-production.yml
     #- cml rm -f --no-confirm
 
   artifacts:
     paths:
-      - lab-topology-production.yml
+      - ../lab-topology-production.yml
     when: on_success
   
   only:
