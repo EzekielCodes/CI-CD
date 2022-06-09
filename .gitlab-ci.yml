@@ -76,21 +76,22 @@ config-cml:
     #https://gitlab.com/ikdoeict/toluwani.akindele/2122-ia-c-cicd-project-akindele-ezekiel/-/jobs/artifacts/development/download?job=config-cml
   #rules:
    # - if: $CI_PIPELINE_SOURCE == "push"
-    #- if: $CI_COMMIT_BRANCH == "develop"
+    #- if: $CI_COMMIT_BRANCH == "development"
 
-#deploy-prod:
- # stage: deploy
-  #script: 
-   # - cml clear
-   # - cml ls
-   # - cml up -f cml/production/prod.yaml --provision
-   # - sed -i 's/10.129.41.196/10.129.41.197/g' running-config.cfg
-   # - cml save --extract -f ../lab-topology-production.yml
-   # - cml rm -f --no-confirm
+deploy-prod:
+  stage: deploy
+  script: 
+    - cml clear
+    - cml ls
+    - cml up -f cml/production/prod.yaml --provision
+    - sed -i 's/10.129.41.196/10.129.41.197/g' ansible/backup/running-config.cfg
+    - ansible-playbook playbook-dev.yml
+    - cml save --extract -f ../lab-topology-production.yml
+    #- cml rm -f --no-confirm
 
-   #artifacts:
-    #paths:
-     # - ansible/backup/running-config.cfg
+   artifacts:
+    paths:
+      - ansible/backup/lab-topology-production.yml
 
-  #only:
-   # - production
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
