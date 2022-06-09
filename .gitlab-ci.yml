@@ -70,9 +70,9 @@ config-cml:
       - ansible/backup/running-config.cfg
     when: on_success
 
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
-    - if: '$CI_COMMIT_REF_NAME == "development"'
+  #rules:
+   # - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+    #- if: '$CI_COMMIT_REF_NAME == "development"'
 
   
 
@@ -101,13 +101,13 @@ deploy-prod:
       - lab-topology-production.yml
     when: on_success
   
-  #only:
-   # - main
+  only:
+    - main
 
   #only:
    # - merge_requests
   #except:
    # variables:
     #  - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+  #rules:
+   # - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
