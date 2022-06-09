@@ -43,18 +43,21 @@ config-cml:
     - cml ls
     - cml clear
     - chmod 700 ansible
-    - cd ansible
-    - export ANSIBLE_CONFIG=ansible.cfg
-    - ansible-playbook playbook-dev.yml
+   # - cd ansible
+   # - export ANSIBLE_CONFIG=ansible.cfg
+   # - ansible-playbook playbook-dev.yml
     - cml ls
     #- cml rm -f --no-confirm
-
-  only:
-    - development
+    - ANSIBLE_CONFIG=$PWD/ansible/ansible.cfg ansible-playbook ansible/playbook-dev.yml
+    - "[ --s ansible/backup/running-config.cfg ] || exit 1" 
     
   artifacts:
     paths:
       - ansible/backup/running-config.cfg
+    when: on_success
+
+  only:
+    - development
 
     
   #rules:
