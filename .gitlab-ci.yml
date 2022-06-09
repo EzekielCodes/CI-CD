@@ -67,4 +67,8 @@ config-cml:
    # - cml clear
    # - cml ls
    # - cml up -f cml/production/prod.yaml --provision
-   # - cml save
+   # - cml save --extract -f ../lab-topology-production.yml
+
+   #artifacts:
+    #paths:
+     # - ansible/backup/running-config.cfg
