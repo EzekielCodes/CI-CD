@@ -1,4 +1,6 @@
 image: rockylinux:8.5
+tags: 
+  - "tag_Ezekiel"
 
 stages:
   - prepare
@@ -40,8 +42,8 @@ prepare-ansible:
 config-cml:
   stage: config
   script:
-    #- echo "$Vars" > /root/.virlrc
-    - echo $'VIRL_HOST=10.129.28.227\nCML_VERIFY_CERT=False\nVIRL_USERNAME=admin\nVIRL_PASSWORD=Azerty123@' > /root/.virlrc
+    - echo "$Vars" > /root/.virlrc
+    #- echo $'VIRL_HOST=10.129.28.227\nCML_VERIFY_CERT=False\nVIRL_USERNAME=admin\nVIRL_PASSWORD=Azerty123@' > /root/.virlrc
     - cat /root/.virlrc
     #- cml --debug ls
     - cml ls
@@ -57,7 +59,7 @@ config-cml:
     - ANSIBLE_CONFIG=$PWD/ansible/ansible.cfg ansible-playbook ansible/playbook-dev.yml
     #- "[ --s ansible/backup/running-config.cfg ] || exit 1" 
     - "[ -s ansible/backup/running-config.cfg ] || exit 1"
-    - curl -O -L https://gitlab.com/ikdoeict/toluwani.akindele/2122-ia-c-cicd-project-akindele-ezekiel/-/jobs/artifacts/development/download?job=config-cml
+    #- curl -O -L https://gitlab.com/ikdoeict/toluwani.akindele/2122-ia-c-cicd-project-akindele-ezekiel/-/jobs/artifacts/development/download?job=config-cml
     
   artifacts:
     paths:
