@@ -43,6 +43,7 @@ config-cml:
     - cd ansible
     - export ANSIBLE_CONFIG=ansible.cfg
     - ansible-playbook playbook-dev.yml
+    - cml ls
     - cml rm -f --no-confirm
     
   artifacts:
