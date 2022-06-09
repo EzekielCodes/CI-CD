@@ -42,7 +42,7 @@ config-cml:
   script:
     - echo "$Vars" > /root/.virlrc
     - cat /root/.virlrc
-    - cml --debug ls
+    #- cml --debug ls
     - cml ls
     - cml up -f cml/development/dev.yaml --provision
     - cml ls
