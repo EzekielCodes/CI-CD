@@ -44,7 +44,7 @@ config-cml:
     - export ANSIBLE_CONFIG=ansible.cfg
     - ansible-playbook playbook-dev.yml
     - cml ls
-    - cml rm -f --no-confirm
+    #- cml rm -f --no-confirm
     
   artifacts:
     paths:
