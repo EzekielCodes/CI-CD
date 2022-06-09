@@ -70,6 +70,10 @@ config-cml:
       - ansible/backup/running-config.cfg
     when: on_success
 
+  only:
+    - development
+    - main
+
   
 
     #https://example.com/<namespace>/<project>/-/jobs/artifacts/<ref>/download?job=<job_name>
