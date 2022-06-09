@@ -57,10 +57,12 @@ config-cml:
    # - export ANSIBLE_CONFIG=ansible.cfg
    # - ansible-playbook playbook-dev.yml
     - cml ls
-    - cml rm -f --no-confirm
+    
     - ANSIBLE_CONFIG=$PWD/ansible/ansible.cfg ansible-playbook ansible/playbook-dev.yml
     #- "[ --s ansible/backup/running-config.cfg ] || exit 1" 
     - "[ -s ansible/backup/running-config.cfg ] || exit 1"
+    - cml ls
+    - cml rm -f --no-confirm
     #- curl -O -L https://gitlab.com/ikdoeict/toluwani.akindele/2122-ia-c-cicd-project-akindele-ezekiel/-/jobs/artifacts/development/download?job=config-cml
     
   artifacts:
@@ -68,8 +70,7 @@ config-cml:
       - ansible/backup/running-config.cfg
     when: on_success
 
-  only:
-    - development
+  
 
     #https://example.com/<namespace>/<project>/-/jobs/artifacts/<ref>/download?job=<job_name>
     #https://gitlab.com/ikdoeict/toluwani.akindele/2122-ia-c-cicd-project-akindele-ezekiel/-/jobs/artifacts/development/download?job=config-cml
@@ -90,3 +91,6 @@ config-cml:
    #artifacts:
     #paths:
      # - ansible/backup/running-config.cfg
+
+  #only:
+   # - production
