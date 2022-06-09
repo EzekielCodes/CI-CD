@@ -81,6 +81,8 @@ config-cml:
 deploy-prod:
   stage: deploy
   script: 
+    - echo "$Vars" > /root/.virlrc
+    - cat /root/.virlrc
     - cml clear
     - cml ls
     - cml up -f cml/production/prod.yaml --provision
