@@ -96,8 +96,8 @@ deploy-prod:
   
   only:
     - merge_requests
-    except:
-      variables:
-        - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
+  except:
+    variables:
+      - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
   #rules:
    # - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
