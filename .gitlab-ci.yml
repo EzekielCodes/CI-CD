@@ -6,7 +6,7 @@ stages:
   - deploy
 
 before_script:
-  - yum update -y
+  #- yum update -y
   - yum install python3 -y
   - yum install python3-pip
   - python3 -m pip install --upgrade pip
@@ -19,7 +19,7 @@ before_script:
   #- source container/bin/activate
   #- pip3 install --upgrade pip
   - pip3 install -r requirements.txt
-  #- ansible-galaxy collection install cisco.ios
+  - ansible-galaxy collection install cisco.ios
 
 
 prepare-ansible:
