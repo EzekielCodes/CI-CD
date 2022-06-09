@@ -25,7 +25,7 @@ before_script:
 prepare-ansible:
   stage: prepare
   script:
-    - pip3 install ansible-lint==5.4.0
+    - pip3 install ansible-lint
 #    - cd ansible
     - ansible-lint playbook-dev.yml -v
     
