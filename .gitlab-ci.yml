@@ -93,6 +93,11 @@ deploy-prod:
     paths:
       - ansible/backup/lab-topology-production.yml
     when: on_success
-
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
+  
+  only:
+     - merge_requests
+   except:
+     variables:
+       - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME != "master"
+  #rules:
+   # - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"'
