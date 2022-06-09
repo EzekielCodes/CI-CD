@@ -62,7 +62,7 @@ config-cml:
     #- "[ --s ansible/backup/running-config.cfg ] || exit 1" 
     - "[ -s ansible/backup/running-config.cfg ] || exit 1"
     - cml ls
-    - cml rm -f --no-confirm
+    #- cml rm -f --no-confirm
     #- curl -O -L https://gitlab.com/ikdoeict/toluwani.akindele/2122-ia-c-cicd-project-akindele-ezekiel/-/jobs/artifacts/development/download?job=config-cml
     
   artifacts:
