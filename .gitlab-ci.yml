@@ -1,13 +1,15 @@
-image: rockylinux:8.5
-tags: 
-  - "tag_Ezekiel"
+
 
 stages:
   - prepare
   - config
   - deploy
 
-before_script:
+default:
+  image: rockylinux:8.5
+  tags: 
+  - "tag_Ezekiel"
+  before_script:
   #- yum update -y
   - yum install python3 -y
   - yum install python3-pip
