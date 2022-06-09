@@ -10,20 +10,20 @@ default:
   tags: 
   - "tag_Ezekiel"
   before_script:
-  #- yum update -y
-  - yum install python3 -y
-  - yum install python3-pip
-  - python3 -m pip install --upgrade pip
-  - pip3 install virtualenv
-  #- python3 -m venv container
-  - python3 -m venv venv
-  - source venv/bin/activate
-  - python3 -m pip install --upgrade pip
+    #- yum update -y
+    - yum install python3 -y
+    - yum install python3-pip
+    - python3 -m pip install --upgrade pip
+    - pip3 install virtualenv
+    #- python3 -m venv container
+    - python3 -m venv venv
+    - source venv/bin/activate
+    - python3 -m pip install --upgrade pip
   
-  #- source container/bin/activate
-  #- pip3 install --upgrade pip
-  - pip3 install -r requirements.txt
-  - ansible-galaxy collection install cisco.ios
+    #- source container/bin/activate
+    #- pip3 install --upgrade pip
+    - pip3 install -r requirements.txt
+    - ansible-galaxy collection install cisco.ios
 
 
 prepare-ansible:
