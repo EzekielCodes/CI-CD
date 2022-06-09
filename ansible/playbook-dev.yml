@@ -33,7 +33,7 @@
       cisco.ios.ios_config:
         backup: yes
         backup_options:
-          dir_path: /backup/running-config.cfg
+          dir_path: ansible/backup/running-config.cfg
 
 
   
