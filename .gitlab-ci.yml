@@ -105,10 +105,13 @@ deploy-prod:
     when: on_success
   
   only:
-    refs:
-        - merge_requests
-    variables:
-        - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
+    - main
+
+  #only:
+   # refs:
+    #    - merge_requests
+    #variables:
+     #   - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master"
 
   #only:
    # - merge_requests
