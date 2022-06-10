@@ -43,9 +43,9 @@ prepare-ansible:
 
 config-cml:
   stage: config
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
-    - if: '$CI_COMMIT_REF_NAME == "development"'
+  #rules:
+   # - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+    #- if: '$CI_COMMIT_REF_NAME == "development"'
   script:
     - echo "$Vars" > /root/.virlrc
     #- echo $'VIRL_HOST=10.129.28.227\nCML_VERIFY_CERT=False\nVIRL_USERNAME=admin\nVIRL_PASSWORD=Azerty123@' > /root/.virlrc
@@ -86,8 +86,8 @@ config-cml:
 
 deploy-prod:
   stage: deploy
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
+  #rules:
+   # - if: '$CI_PIPELINE_SOURCE == "merge_request_event" && $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"'
   script: 
     - echo "$Vars" > /root/.virlrc
     - cat /root/.virlrc
@@ -104,8 +104,11 @@ deploy-prod:
       - lab-topology-production.yml
     when: on_success
   
-  #only:
-   # - main
+  only:
+    refs:
+        - merge_requests
+    variables:
+        - $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main"
 
   #only:
    # - merge_requests
